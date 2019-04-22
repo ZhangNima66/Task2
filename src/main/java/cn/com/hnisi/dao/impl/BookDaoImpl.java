@@ -33,7 +33,7 @@ public class BookDaoImpl implements IBookDao
             Object[] params = {book.getId(), book.getName(), book.getPrice(), book.getAuthor(),
                     new Date(book.getPublicationDate().getTime()),
                     book.getImage(), book.getDescription(),
-                    book.getCategoryId()};
+                    book.getCategory_id()};
             runner.update(conn, sql, params);
         } catch (Exception e)
         {
@@ -68,7 +68,7 @@ public class BookDaoImpl implements IBookDao
 
             List<Book> list;
             int totalrecord;
-            if (where == null || "".equals(where.trim()))
+            if (param == null || "".equals(param))
             {           // 不带条件，则返回所有书的分页数据
                 String sql = "SELECT * FROM (SELECT A.*, ROWNUM RN FROM (SELECT * FROM MXZ_BOOK where isDel=0) A WHERE ROWNUM < ?) WHERE RN >= ? ";
                 Object[] params = {startIndex + pageSize, startIndex};
@@ -103,7 +103,7 @@ public class BookDaoImpl implements IBookDao
             Connection conn = JdbcUtils.getConnection();
             String sql = "update mxz_book set name=?,price=?,author=?,publicationDate=?,image=?,description=?,category_id=?,isDel=? where id=?";
             Object[] params = {book.getName(), book.getPrice(), book.getAuthor(), new Date(book.getPublicationDate().getTime()),
-                    book.getImage(), book.getDescription(), book.getCategoryId(), book.getIsDel(), book.getId()};
+                    book.getImage(), book.getDescription(), book.getCategory_id(), book.getIsDel(), book.getId()};
             runner.update(conn, sql, params);
         } catch (Exception e)
         {

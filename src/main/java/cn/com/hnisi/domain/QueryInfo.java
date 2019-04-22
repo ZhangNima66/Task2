@@ -6,7 +6,7 @@ public class QueryInfo
 	private int pagesize = 3;
 	private int startindex;
 
-	private String queryname;
+	private String queryname = "category_id";
 	private String queryvalue;
 	private String where;
 
@@ -63,8 +63,8 @@ public class QueryInfo
 			return "";
 		} else
 		{
-			//this.where = "where category_id=?";
-			where = "where " + queryname + "=?";
+			//this.where = "and category_id=?";
+			where = "and " + queryname + "=?";
 		}
 		return where;
 	}

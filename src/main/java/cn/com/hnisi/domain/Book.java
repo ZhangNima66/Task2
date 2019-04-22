@@ -18,7 +18,7 @@ public class Book implements Serializable
     private Date publicationDate;
     private String image;
     private String description;
-    private String categoryId;
+    private String category_id;
     private int isDel = 0;
 
     @Override
@@ -32,7 +32,7 @@ public class Book implements Serializable
                 ", publicationDate=" + publicationDate +
                 ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
-                ", categoryId='" + categoryId + '\'' +
+                ", categoryId='" + category_id + '\'' +
                 ", isDel=" + isDel +
                 ", category=" + category +
                 '}';
@@ -120,14 +120,14 @@ public class Book implements Serializable
         this.description = description;
     }
 
-    public String getCategoryId()
+    public String getCategory_id()
     {
-        return categoryId;
+        return category_id;
     }
 
-    public void setCategoryId(String categoryId)
+    public void setCategory_id(String category_id)
     {
-        this.categoryId = categoryId;
+        this.category_id = category_id;
     }
 
     public Category getCategory()

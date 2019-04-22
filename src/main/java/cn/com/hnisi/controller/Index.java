@@ -7,6 +7,7 @@ import cn.com.hnisi.domain.QueryResult;
 import cn.com.hnisi.factory.BeanFactory;
 import cn.com.hnisi.service.IBookService;
 import cn.com.hnisi.service.ICategoryService;
+import cn.com.hnisi.utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +21,14 @@ public class Index extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        QueryInfo info = new QueryInfo();
-        info.setCurrentpage(1);
-        info.setPagesize(3);
+        QueryInfo info = WebUtils.request2Bean(request, QueryInfo.class);
         ICategoryService cService = (ICategoryService) BeanFactory.getBean("CategoryService");
         IBookService bService = (IBookService) BeanFactory.getBean("BookService");
         List<Category> categories = cService.getCategoryAll();
         PageBean pagebean = bService.queryPage(info);
         request.setAttribute("categories",categories);
-        request.setAttribute("pagebean",pagebean);
+        request.setAttribute("bean",pagebean);
+        request.setAttribute("category",info.getQueryvalue());
 
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request,response);
     }

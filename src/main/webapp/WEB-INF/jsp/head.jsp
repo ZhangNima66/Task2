@@ -9,8 +9,8 @@
 	<h1>网上书店</h1>
 	<br/>
 	<div>
-		<a href="${pageContext.request.contextPath }">首页</a>
-		<a href="${pageContext.request.contextPath }">添加书籍</a>
+		<a href="${pageContext.request.contextPath }/index" target="main">首页</a>
+		<a href="${pageContext.request.contextPath }/BookServlet?method=addUI" target="main">添加书籍</a>
 	</div>
 </div>
 

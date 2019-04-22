@@ -25,7 +25,7 @@ public class BookDaoImplTest
         book.setPublicationDate(new Date());
         book.setImage("1.jpg");
         book.setDescription("专注与Java基础的书籍");
-        book.setCategoryId("2");
+        book.setCategory_id("2");
 
         dao.insertBook(book);
     }
