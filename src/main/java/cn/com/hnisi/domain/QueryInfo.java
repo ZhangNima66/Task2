@@ -64,7 +64,16 @@ public class QueryInfo
 		} else
 		{
 			//this.where = "and category_id=?";
-			where = "and " + queryname + "=?";
+			if ("category_id".equals(queryname) || "price".equals(queryname))
+				where = "and " + queryname + "=?";
+			else if("name".equals(queryname) || "author".equals(queryname))
+			{
+				where= "and " + queryname + " like ?";
+				setQueryvalue("%"+getQueryvalue()+"%");
+			}else if("publicationDate".equals(queryname))
+			{
+				where = "and " + queryname + "=to_date('?','yyyy-mm-dd')";
+			}
 		}
 		return where;
 	}

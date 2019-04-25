@@ -17,31 +17,32 @@
 </head>
 
 <body>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/register.js"></script>
 <form
         action="${pageContext.request.contextPath }/BookServlet?method=edit"
         method="post" enctype="multipart/form-data">
-    <table width="500px">
+    <table id="tab" width="500px">
         <tr>
             <td>书名</td>
             <td>
                 <input type="hidden" name="id" value="${book.id}">
-                <input type="text" name="name" value="${book.name}" style="width: 200px">
+                <input type="text" name="name" value="${book.name}" style="width: 200px" onblur="onblurs(this)" onFocus="onFocus(this)" required pattern="^(\w|-|[\u4E00-\u9FA5])*$">
             </td>
         <tr>
         <tr>
             <td>作者</td>
-            <td><input type="text" name="author" value="${book.author}" style="width: 200px"></td>
+            <td><input type="text" name="author" value="${book.author}" style="width: 200px" onblur="onblurs(this)" onFocus="onFocus(this)" required pattern="^(\w|-|[\u4E00-\u9FA5])*$"></td>
         </tr>
         <tr>
             <td>出版日期</td>
             <td>
-                <input type="date" name="publicationDate" value="<fmt:formatDate value="${book.publicationDate}" pattern="yyyy-MM-dd"/>" style="width: 200px">
+                <input type="date" name="publicationDate" value="<fmt:formatDate value="${book.publicationDate}" pattern="yyyy-MM-dd"/>" style="width: 200px"
+                       onblur="onblurs(this)" onFocus="onFocus(this)" required pattern="^(\w|-|[\u4E00-\u9FA5])*$">
             </td>
         </tr>
         <tr>
             <td>售价</td>
-            <td><input type="text" name="price" value="${book.price}" style="width: 200px"></td>
+            <td><input type="text" name="price" value="${book.price}" style="width: 200px" onblur="onblurs(this)" onFocus="onFocus(this)" required pattern="^(\w|-|[\u4E00-\u9FA5])*$"></td>
         </tr>
         <tr>
             <td>图片</td>
@@ -50,12 +51,12 @@
                 <img src="${pageContext.request.contextPath }/images/${book.image }"
                      width="83" height="118" /><br/>
                 <input TYPE="hidden" name="image" value="${book.image}">
-                <input type="file" name="imageFile" style="width: 200px">
+                <input type="file" name="imageFile" style="width: 200px" required pattern="^(\w|-|[\u4E00-\u9FA5])*$">
             </td>
         </tr>
         <tr>
             <td>描述</td>
-            <td><textarea rows="4" cols="40" name="description">${book.description}</textarea></td>
+            <td><textarea rows="4" cols="40" name="description" onblur="onblurs(this)" onFocus="onFocus(this)" required pattern="^(\w|-|[\u4E00-\u9FA5])*$">${book.description}</textarea></td>
         </tr>
         <tr>
             <td>所属分类</td>
@@ -67,7 +68,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="修改书籍"></td>
+            <td><input type="submit" id="sub" value="修改书籍"></td>
         </tr>
     </table>
 </form>

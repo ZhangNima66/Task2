@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CategoryServlet extends HttpServlet
 {
     private static CategoryServiceImpl service;
+
     static
     {
         service = (CategoryServiceImpl) BeanFactory.getBean("CategoryService");
@@ -39,7 +40,53 @@ public class CategoryServlet extends HttpServlet
             listUI(request, response);
             return;
         }
+        if ("updateUI".equals(method))
+        {
+            updateUI(request, response);
+            return;
+        }
+        if ("update".equals(method))
+        {
+            update(request, response);
+            return;
+        }
+        if ("delete".equals(method))
+        {
+            delete(request, response);
+            return;
+        }
     }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        String id = request.getParameter("id");
+        service.deleteCategory(id);
+        response.sendRedirect(request.getContextPath()+"/index");
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Category category = WebUtils.request2Bean(request, Category.class);
+        try
+        {
+            service.updateCategory(category);
+            request.setAttribute("message", "修改成功");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            request.setAttribute("message", "修改失败");
+        }
+        request.getRequestDispatcher("/message.jsp").forward(request, response);
+    }
+
+    private void updateUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        String id = request.getParameter("id");
+        Category category = service.findCategoryById(id);
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("/WEB-INF/jsp/updatecategory.jsp").forward(request, response);
+    }
+
     private void listUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         List<Category> categories = service.getCategoryAll();
@@ -70,6 +117,6 @@ public class CategoryServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

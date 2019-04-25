@@ -51,9 +51,7 @@
             return;
         }
         var pagesize = document.getElementById("pagesize").value;
-        if (${bean.pagesize} !=
-        pagesize
-    )
+        if (${bean.pagesize} != pagesize)
         {
             currentpage = 1;
         }
@@ -63,6 +61,18 @@
 
 <div id="books">
     <div id="pageSet" align="center">
+        <form action="${pageContext.request.contextPath}/index" method="post">
+            查询类型：
+            <select name="queryname">
+                <option value="name">名称</option>
+                <option value="author">作者</option>
+                <option value="price">价格</option>
+                <option value="publicationDate">出版日期</option>
+            </select>
+            查询条件：<input type="text" name="queryvalue">
+            <input type="submit" value="查询">
+        </form>
+        <br/>
         共[${bean.totalrecord }]条记录， 每页
         <select id="pagesize" onchange="gotopage(${bean.currentpage})">
             <option value="3" ${fn:contains(bean.pagesize,3)?'selected = "selected"':''}>3</option>
